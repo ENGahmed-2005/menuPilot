@@ -1,0 +1,340 @@
+/* ==========================================================================
+   Admin shell — sidebar + topbar
+   ========================================================================== */
+
+.admin-shell {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+/* ------------------------------- Sidebar -------------------------------- */
+.admin-sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: var(--gray-900);
+  color: var(--gray-300);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  inset-block-start: 0;
+  height: 100vh;
+  z-index: 60;
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 20px 20px 18px;
+  color: #fff;
+  border-block-end: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.admin-brand .brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  min-width: 0;
+}
+
+.admin-brand .brand-name {
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+.admin-brand .brand-sub {
+  font-size: 11.5px;
+  color: var(--gray-400);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-nav {
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.admin-nav .nav-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gray-500);
+  padding: 12px 12px 6px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--gray-400);
+  transition: background var(--t-fast), color var(--t-fast);
+  position: relative;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.nav-link.active {
+  background: var(--brand-500);
+  color: #fff;
+}
+
+.nav-link .nav-badge {
+  margin-inline-start: auto;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  border-radius: var(--r-full);
+  font-size: 11.5px;
+  font-weight: 700;
+  min-width: 22px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 6px;
+}
+
+.nav-link:not(.active) .nav-badge {
+  background: var(--brand-500);
+}
+
+.admin-sidebar-footer {
+  padding: 14px 12px;
+  border-block-start: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  min-width: 0;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--brand-500);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.sidebar-user .u-name {
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.sidebar-user .u-mail {
+  color: var(--gray-500);
+  font-size: 11.5px;
+}
+
+.sidebar-action {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: var(--r-md);
+  color: var(--gray-400);
+  font-size: 13.5px;
+  font-weight: 600;
+  width: 100%;
+  transition: background var(--t-fast), color var(--t-fast);
+}
+
+.sidebar-action:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+/* -------------------------------- Main ---------------------------------- */
+.admin-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-topbar {
+  height: var(--topbar-h);
+  background: var(--surface);
+  border-block-end: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-inline: 20px;
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 50;
+}
+
+.admin-topbar .topbar-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.admin-content {
+  padding: 24px 20px 48px;
+  flex: 1;
+}
+
+.sidebar-toggle {
+  display: none;
+}
+
+.sidebar-overlay {
+  display: none;
+}
+
+/* ------------------------------ Alert pill ------------------------------ */
+.alert-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: var(--r-full);
+  background: var(--purple-50);
+  color: var(--purple-700);
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid var(--purple-100);
+  animation: pulseRing 2.2s infinite;
+}
+
+/* ------------------------------- Stat card ------------------------------ */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 16px;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  box-shadow: var(--shadow-xs);
+  transition: box-shadow var(--t-fast), transform var(--t-fast);
+}
+
+.stat-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.stat-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--r-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.stat-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ------------------------------ Responsive ------------------------------ */
+@media (max-width: 1024px) {
+  .admin-sidebar {
+    position: fixed;
+    inset-block: 0;
+    inset-inline-start: 0;
+    transform: translateX(-100%);
+    transition: transform var(--t-base);
+    box-shadow: var(--shadow-xl);
+  }
+
+  [dir="rtl"] .admin-sidebar {
+    transform: translateX(100%);
+  }
+
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-toggle {
+    display: inline-flex;
+  }
+
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.5);
+    z-index: 55;
+    animation: fadeIn var(--t-fast);
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-content {
+    padding: 16px 14px 40px;
+  }
+
+  .admin-topbar {
+    padding-inline: 14px;
+  }
+
+  .page-title {
+    font-size: 19px;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 14px;
+    gap: 11px;
+  }
+
+  .stat-value {
+    font-size: 20px;
+  }
+}
