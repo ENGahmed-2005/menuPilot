@@ -2,7 +2,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/contexts";
 import { Loading } from "../components/ui/States";
 
-/** Blocks unauthenticated access to owner/staff routes. */
+/** Blocks unauthenticated access to owner/staff routes and preserves the full return URL. */
 export default function ProtectedRoute({ children }) {
   const { isAuthenticated, booting } = useAuth();
   const location = useLocation();
@@ -16,7 +16,8 @@ export default function ProtectedRoute({ children }) {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace state={{ from: location.pathname }} />;
+    const returnTo = `${location.pathname}${location.search}${location.hash}`;
+    return <Navigate to="/login" replace state={{ from: returnTo }} />;
   }
 
   return children;
